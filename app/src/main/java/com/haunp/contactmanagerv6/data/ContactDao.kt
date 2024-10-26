@@ -18,4 +18,6 @@ interface ContactDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(contacts: List<Contact>)
 
+    @Query("SELECT COUNT(*) FROM contacts WHERE email = :email AND phone = :phone")
+    suspend fun countByEmailOrPhone(email: String, phone: String): Int
 }

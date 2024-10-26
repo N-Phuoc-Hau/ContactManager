@@ -29,6 +29,7 @@ class LoadJsonFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_load_json, container, false)
 
+
         // Khởi tạo ViewModel
         contactViewModel = ViewModelProvider(requireActivity()).get(ContactViewModel::class.java)
 
@@ -62,11 +63,6 @@ class LoadJsonFragment : Fragment() {
         // Thêm file JSON vào danh sách đã load để tránh load lại
         loadedJsonFiles.add(resourceId)
 
-        // Hiển thị giao diện loading và khóa màn hình
-        view?.findViewById<View>(R.id.overlayView)?.visibility = View.VISIBLE
-        view?.findViewById<TextView>(R.id.textViewLoadingMessage)?.visibility = View.VISIBLE
-        view?.findViewById<ProgressBar>(R.id.progressBar)?.visibility = View.VISIBLE
-        view?.findViewById<Button>(R.id.buttonSelectJson)?.visibility = View.GONE
 
         // Sử dụng Coroutine để tải và thêm dữ liệu vào database trên luồng nền
         lifecycleScope.launch(Dispatchers.IO) {
@@ -84,11 +80,6 @@ class LoadJsonFragment : Fragment() {
             withContext(Dispatchers.Main) {
                 Toast.makeText(requireContext(), "Đã tải xong", Toast.LENGTH_SHORT).show()
 
-                // Ẩn loading và mở khóa màn hình
-                view?.findViewById<View>(R.id.overlayView)?.visibility = View.GONE
-                view?.findViewById<TextView>(R.id.textViewLoadingMessage)?.visibility = View.GONE
-                view?.findViewById<ProgressBar>(R.id.progressBar)?.visibility = View.GONE
-                view?.findViewById<Button>(R.id.buttonSelectJson)?.visibility = View.VISIBLE
 
                 // Chuyển sang ContactListFragment
                 parentFragmentManager.beginTransaction()

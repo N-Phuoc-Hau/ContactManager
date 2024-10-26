@@ -1,6 +1,8 @@
 package com.haunp.contactmanagerv6
 
 import android.os.Bundle
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -26,6 +28,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var contactCountTextView: TextView
 
 
+    private lateinit var overlayView: View
+    private lateinit var textViewLoadingMessage: TextView
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +43,24 @@ class MainActivity : AppCompatActivity() {
 
         // Khởi tạo TextView để đếm số liên hệ
         contactCountTextView = findViewById(R.id.contactCountTextView)
+
+
+
+        overlayView = findViewById(R.id.overlayView)
+        textViewLoadingMessage = findViewById(R.id.textViewLoadingMessage)
+        progressBar = findViewById(R.id.progressBar)
+
+        contactViewModel.loadingState.observe(this) { isLoading ->
+            if (isLoading) {
+                overlayView.visibility = View.VISIBLE
+                textViewLoadingMessage.visibility = View.VISIBLE
+                progressBar.visibility = View.VISIBLE
+            } else {
+                overlayView.visibility = View.GONE
+                textViewLoadingMessage.visibility = View.GONE
+                progressBar.visibility = View.GONE
+            }
+        }
 
         // Cập nhật số lượng liên hệ
         updateContactCount()

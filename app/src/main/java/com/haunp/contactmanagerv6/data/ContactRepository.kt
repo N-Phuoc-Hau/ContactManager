@@ -18,4 +18,8 @@ class ContactRepository(private val contactDao: ContactDao) {
         contactDao.insertAll(contacts)
     }
 
+    suspend fun isContactDuplicate(email: String, phone: String): Boolean {
+        return contactDao.countByEmailOrPhone(email, phone) > 0
+    }
+
 }
