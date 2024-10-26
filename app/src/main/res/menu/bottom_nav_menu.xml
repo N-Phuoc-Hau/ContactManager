@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/nav_contact_list"
+        android:title="Contacts"
+        android:icon="@drawable/ic_contacts"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/nav_add_contact"
+        android:title="Add Contact"
+        android:icon="@drawable/ic_add"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/nav_delete_all"
+        android:icon="@drawable/ic_delete"
+        android:title="Delete All"
+        android:enabled="true"
+        android:visible="true" />
+    <item
+        android:id="@+id/nav_load_json"
+        android:title="Load From JSON"
+        android:icon="@drawable/ic_import"
+        app:showAsAction="never" />
+
+</menu>
